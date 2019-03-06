@@ -11,10 +11,10 @@ class App extends Component {
       }
     }
 
-    this.filterByName = this.filterByName.bind(this);
+    this.filterPokemons = this.filterPokemons.bind(this);
   }
 
-  filterByName(e) {
+  filterPokemons(e) {
     const { name, value } = e.currentTarget;
     this.setState(prevState => {
       const newState = {
@@ -32,7 +32,7 @@ class App extends Component {
     const { pokemonName } = filters;
     return (
       <div className="App">
-        <Main pokemonName={pokemonName} filterByName={this.filterByName} />
+        <Main pokemonName={pokemonName} filterPokemons={this.filterPokemons} />
       </div>
     );
   }

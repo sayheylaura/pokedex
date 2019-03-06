@@ -4,10 +4,10 @@ import Filter from '../Filter';
 
 class Main extends Component {
   render() {
-    const { pokemonName, filterByName } = this.props;
+    const { pokemonName, filterPokemons } = this.props;
     return (
       <main className="app__main">
-        <Filter pokemonName={pokemonName} filterByName={filterByName} />
+        <Filter pokemonName={pokemonName} filterPokemons={filterPokemons} />
       </main>
     );
   }
@@ -15,7 +15,7 @@ class Main extends Component {
 
 Main.propTypes = {
   pokemonName: PropTypes.string.isRequired,
-  filterByName: PropTypes.func.isRequired
+  filterPokemons: PropTypes.func.isRequired
 }
 
 export default Main;
