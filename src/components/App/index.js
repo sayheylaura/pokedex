@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
+import { fetchPokemons } from '../../services/PokemonService';
 import Main from '../Main';
 
 class App extends Component {
@@ -12,6 +13,13 @@ class App extends Component {
     }
 
     this.filterPokemons = this.filterPokemons.bind(this);
+  }
+
+  componentDidMount() {
+    fetchPokemons()
+      .then(data => {
+        console.log(data);
+      })
   }
 
   filterPokemons(e) {
