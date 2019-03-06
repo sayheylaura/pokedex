@@ -17,8 +17,17 @@ class App extends Component {
 
   componentDidMount() {
     fetchPokemons()
-      .then(data => {
-        console.log(data);
+      .then(pokemonData => {
+        console.log(pokemonData);
+        const results = pokemonData.results;
+        console.log(results);
+        results.forEach(item => {
+          fetch(item.url)
+            .then(response => response.json())
+            .then(itemData => {
+              console.log('itemData', itemData);
+            })
+        })
       })
   }
 
