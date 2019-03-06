@@ -6,18 +6,30 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pokemonName: ""
+      filters: {
+        pokemonName: ""
+      }
     }
 
     this.filterByName = this.filterByName.bind(this);
   }
 
-  filterByName() {
-    console.log('filtering by name');
+  filterByName(e) {
+    const { name, value } = e.currentTarget;
+    this.setState(prevState => {
+      const newState = {
+        filters: {
+          ...prevState.filters,
+          [name]: value
+        }
+      };
+      return newState;
+    })
   }
 
   render() {
-    const { pokemonName } = this.state;
+    const { filters } = this.state;
+    const { pokemonName } = filters;
     return (
       <div className="App">
         <Main pokemonName={pokemonName} filterByName={this.filterByName} />

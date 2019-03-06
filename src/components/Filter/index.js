@@ -10,7 +10,7 @@ class Filter extends Component {
         <Input
           labelContent="Filter pokemons by name"
           inputType="text"
-          inputName="name"
+          inputName="pokemonName"
           inputValue={pokemonName}
           example="Ex: Pikachu"
           handleInputChange={filterByName}
