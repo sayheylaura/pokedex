@@ -78,7 +78,11 @@ class App extends Component {
     const filteredPokemons = this.filterPokemonsByName();
     return (
       <div className="App">
-        <Main pokemonName={pokemonName} pokemonData={filteredPokemons} saveUserQuery={this.saveUserQuery} />
+        <Main
+          pokemonName={pokemonName}
+          pokemonData={filteredPokemons}
+          saveUserQuery={this.saveUserQuery}
+        />
       </div>
     );
   }

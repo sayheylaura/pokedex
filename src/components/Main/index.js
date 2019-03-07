@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Filter from '../Filter';
+import PokemonList from '../PokemonList';
+import Loader from '../Loader';
 
 class Main extends Component {
   render() {
@@ -9,15 +11,11 @@ class Main extends Component {
       <main className="app__main">
         <Filter pokemonName={pokemonName} saveUserQuery={saveUserQuery} />
 
-        <ul className="pokemon__list">
-          {!!pokemonData && !!pokemonData.length && pokemonData.map(pokemon => {
-            return (
-              <li key={pokemon.id}>
-                {pokemon.name}
-              </li>
-            );
-          })}
-        </ul>
+        {(pokemonData.length < 25) ? (
+          <Loader />
+        ) : (
+          <PokemonList pokemonData={pokemonData} />
+        )}
       </main>
     );
   }
