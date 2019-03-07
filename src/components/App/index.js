@@ -9,7 +9,8 @@ class App extends Component {
     this.state = {
       filters: {
         pokemonName: ""
-      }
+      },
+      pokemonData: []
     }
 
     this.filterPokemons = this.filterPokemons.bind(this);
@@ -26,9 +27,20 @@ class App extends Component {
             .then(response => response.json())
             .then(itemData => {
               console.log('itemData', itemData);
+              this.setState(prevState => {
+                const newState = {
+                  pokemonData: prevState.pokemonData.concat(itemData)
+                };
+                this.saveDataAtLocalStorage(newState.pokemonData);
+                return newState;
+              })
             })
         })
       })
+  }
+
+  saveDataAtLocalStorage(data) {
+    localStorage.setItem("savedData", JSON.stringify(data));
   }
 
   filterPokemons(e) {
