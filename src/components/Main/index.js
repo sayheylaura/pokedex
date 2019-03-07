@@ -11,10 +11,10 @@ class Main extends Component {
       <main className="app__main">
         <Filter pokemonName={pokemonName} saveUserQuery={saveUserQuery} />
 
-        {(pokemonData.length < 25) ? (
-          <Loader />
-        ) : (
+        {(!!pokemonData && !!pokemonData.length) ? (
           <PokemonList pokemonData={pokemonData} />
+        ) : (
+          <Loader />
         )}
       </main>
     );
