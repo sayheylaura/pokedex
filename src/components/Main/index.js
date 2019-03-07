@@ -4,10 +4,20 @@ import Filter from '../Filter';
 
 class Main extends Component {
   render() {
-    const { pokemonName, filterPokemons } = this.props;
+    const { pokemonName, pokemonData, filterPokemons } = this.props;
     return (
       <main className="app__main">
         <Filter pokemonName={pokemonName} filterPokemons={filterPokemons} />
+
+        <ul className="pokemon__list">
+          {!!pokemonData && !!pokemonData.length && pokemonData.map(pokemon => {
+            return (
+              <li key={pokemon.id}>
+                {pokemon.name}
+              </li>
+            );
+          })}
+        </ul>
       </main>
     );
   }
@@ -15,6 +25,7 @@ class Main extends Component {
 
 Main.propTypes = {
   pokemonName: PropTypes.string.isRequired,
+  pokemonData: PropTypes.array.isRequired,
   filterPokemons: PropTypes.func.isRequired
 }
 

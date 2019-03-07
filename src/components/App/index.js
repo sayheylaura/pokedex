@@ -19,14 +19,11 @@ class App extends Component {
   fetchAndSaveData() {
     fetchPokemons()
       .then(pokemonData => {
-        console.log(pokemonData);
         const results = pokemonData.results;
-        console.log(results);
         results.forEach(item => {
           fetch(item.url)
             .then(response => response.json())
             .then(itemData => {
-              console.log('itemData', itemData);
               this.setState(prevState => {
                 const newState = {
                   pokemonData: prevState.pokemonData.concat(itemData)
@@ -67,11 +64,11 @@ class App extends Component {
   }
 
   render() {
-    const { filters } = this.state;
+    const { pokemonData, filters } = this.state;
     const { pokemonName } = filters;
     return (
       <div className="App">
-        <Main pokemonName={pokemonName} filterPokemons={this.filterPokemons} />
+        <Main pokemonName={pokemonName} pokemonData={pokemonData} filterPokemons={this.filterPokemons} />
       </div>
     );
   }
