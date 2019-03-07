@@ -10,13 +10,13 @@ class App extends Component {
       filters: {
         pokemonName: ""
       },
-      pokemonData: []
+      pokemonData: this.getDataFromLocalStorage()
     }
 
     this.filterPokemons = this.filterPokemons.bind(this);
   }
 
-  componentDidMount() {
+  fetchAndSaveData() {
     fetchPokemons()
       .then(pokemonData => {
         console.log(pokemonData);
@@ -41,6 +41,16 @@ class App extends Component {
 
   saveDataAtLocalStorage(data) {
     localStorage.setItem("savedData", JSON.stringify(data));
+  }
+
+  getDataFromLocalStorage() {
+    const savedData = localStorage.getItem("savedData");
+    if (!savedData) {
+      this.fetchAndSaveData();
+      return [];
+    } else {
+      return JSON.parse(savedData);
+    }
   }
 
   filterPokemons(e) {
