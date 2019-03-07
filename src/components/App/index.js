@@ -13,7 +13,7 @@ class App extends Component {
       pokemonData: this.getDataFromLocalStorage()
     }
 
-    this.filterPokemons = this.filterPokemons.bind(this);
+    this.saveUserQuery = this.saveUserQuery.bind(this);
   }
 
   fetchAndSaveData() {
@@ -50,7 +50,7 @@ class App extends Component {
     }
   }
 
-  filterPokemons(e) {
+  saveUserQuery(e) {
     const { name, value } = e.currentTarget;
     this.setState(prevState => {
       const newState = {
@@ -63,12 +63,22 @@ class App extends Component {
     })
   }
 
-  render() {
+  filterPokemonsByName() {
     const { pokemonData, filters } = this.state;
     const { pokemonName } = filters;
+    const filteredPokemons = pokemonData.filter(pokemon => {
+      return !pokemonName || pokemon.name.includes(pokemonName.toLowerCase());
+    });
+    return filteredPokemons;
+  }
+
+  render() {
+    const { filters } = this.state;
+    const { pokemonName } = filters;
+    const filteredPokemons = this.filterPokemonsByName();
     return (
       <div className="App">
-        <Main pokemonName={pokemonName} pokemonData={pokemonData} filterPokemons={this.filterPokemons} />
+        <Main pokemonName={pokemonName} pokemonData={filteredPokemons} saveUserQuery={this.saveUserQuery} />
       </div>
     );
   }

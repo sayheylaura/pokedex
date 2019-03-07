@@ -4,7 +4,7 @@ import Input from '../Input';
 
 class Filter extends Component {
   render() {
-    const { pokemonName, filterPokemons } = this.props;
+    const { pokemonName, saveUserQuery } = this.props;
     return (
       <section className="app__filter">
         <Input
@@ -13,7 +13,7 @@ class Filter extends Component {
           inputName="pokemonName"
           inputValue={pokemonName}
           example="Ex: Pikachu"
-          handleInputChange={filterPokemons}
+          handleInputChange={saveUserQuery}
         />
       </section>
     );
@@ -22,7 +22,7 @@ class Filter extends Component {
 
 Filter.propTypes = {
   pokemonName: PropTypes.string.isRequired,
-  filterPokemons: PropTypes.func.isRequired
+  saveUserQuery: PropTypes.func.isRequired
 }
 
 export default Filter;
