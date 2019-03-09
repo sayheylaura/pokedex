@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import PokemonCard from '../PokemonCard';
 
 class PokemonList extends Component {
   render() {
@@ -8,8 +9,8 @@ class PokemonList extends Component {
       <ul className="pokemon__list">
         {pokemonData.map(pokemon => {
           return (
-            <li key={pokemon.id}>
-              {pokemon.name}
+            <li key={pokemon.id} className="pokemon__item">
+              <PokemonCard pokemon={pokemon} />
             </li>
           );
         })}
@@ -19,7 +20,9 @@ class PokemonList extends Component {
 }
 
 PokemonList.propTypes = {
-  pokemonData: PropTypes.array.isRequired
+  pokemonData: PropTypes.arrayOf(
+    PropTypes.object.isRequired
+  ).isRequired
 }
 
 export default PokemonList;

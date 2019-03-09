@@ -18,8 +18,8 @@ class App extends Component {
 
   fetchAndSaveData() {
     fetchPokemons()
-      .then(pokemonData => {
-        const results = pokemonData.results;
+      .then(data => {
+        const results = data.results;
         results.forEach(item => {
           fetch(item.url)
             .then(response => response.json())
