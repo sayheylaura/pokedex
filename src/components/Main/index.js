@@ -4,6 +4,7 @@ import Filter from '../Filter';
 import PokemonList from '../PokemonList';
 import Loader from '../Loader';
 import Triangle from '../Triangle';
+import Circle from '../Circle';
 
 class Main extends Component {
   render() {
@@ -19,8 +20,12 @@ class Main extends Component {
         {(!!pokemonData && !!pokemonData.length) ? (
           <PokemonList pokemonData={pokemonData} />
         ) : (
-          <Loader />
-        )}
+            <Loader />
+          )}
+
+        <Circle styles="circle circle-left" />
+
+        <Circle styles="circle circle-right" />
       </main>
     );
   }
