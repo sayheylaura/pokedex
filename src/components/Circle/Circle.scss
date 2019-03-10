@@ -1,0 +1,22 @@
+.circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 0 0 100px 0;
+  background: red;
+  position: fixed;
+  bottom: 0;
+
+  @media all and (min-width: 800px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.circle-left {
+  transform: rotate(-90deg);
+}
+
+.circle-right {
+  transform: rotate(180deg);  
+  right: 0;
+}
