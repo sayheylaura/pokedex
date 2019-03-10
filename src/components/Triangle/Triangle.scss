@@ -1,0 +1,25 @@
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+  border-right: 60px solid #000;
+  position: absolute;
+  top: -52px;
+
+  @media all and (min-width: 800px) {
+    border-top: 80px solid transparent;
+  border-bottom: 80px solid transparent;
+  border-right: 80px solid #000;
+  }
+}
+
+.triangle-left {
+  transform: rotate(45deg);
+  left: -12px;
+}
+
+.triangle-right {
+  transform: rotate(135deg);  
+  right: -12px;
+}
