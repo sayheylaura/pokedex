@@ -20,19 +20,24 @@ class App extends Component {
     fetchPokemons()
       .then(data => {
         const results = data.results;
-        results.forEach(item => {
-          fetch(item.url)
-            .then(response => response.json())
-            .then(itemData => {
+
+        const promises = results.map(item => {
+          const promise = fetch(item.url).then(response => response.json());
+          return promise;
+        });
+
+        Promise.all(promises)
+          .then(responses => {
+            responses.forEach(response => {
               this.setState(prevState => {
                 const newState = {
-                  pokemonData: prevState.pokemonData.concat(itemData)
+                  pokemonData: prevState.pokemonData.concat(response)
                 };
                 this.saveDataAtLocalStorage(newState.pokemonData);
                 return newState;
               })
             })
-        })
+          })
       })
   }
 
