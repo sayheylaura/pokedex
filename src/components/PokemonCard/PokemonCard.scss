@@ -1,5 +1,11 @@
 .pokemon__card {
   background-color: #fff;
+  transition: all .3s;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .pokemon__image-wrapper {
