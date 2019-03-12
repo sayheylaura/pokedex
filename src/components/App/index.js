@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.scss';
 import { fetchPokemons } from '../../services/PokemonService';
+import Triangle from '../Triangle';
+import Circle from '../Circle';
+import Header from '../Header';
 import Main from '../Main';
 
 class App extends Component {
@@ -8,12 +11,17 @@ class App extends Component {
     super(props);
     this.state = {
       filters: {
-        pokemonName: ""
+        pokemonName: ''
       },
-      pokemonData: this.getDataFromLocalStorage()
+      pokemonData: [],
+      isFetching: true
     }
 
     this.saveUserQuery = this.saveUserQuery.bind(this);
+  }
+
+  componentDidMount() {
+    this.getDataFromLocalStorage();
   }
 
   fetchAndSaveData() {
@@ -31,7 +39,8 @@ class App extends Component {
             responses.forEach(response => {
               this.setState(prevState => {
                 const newState = {
-                  pokemonData: prevState.pokemonData.concat(response)
+                  pokemonData: prevState.pokemonData.concat(response),
+                  isFetching: false
                 };
                 this.saveDataAtLocalStorage(newState.pokemonData);
                 return newState;
@@ -42,16 +51,19 @@ class App extends Component {
   }
 
   saveDataAtLocalStorage(data) {
-    localStorage.setItem("savedData", JSON.stringify(data));
+    localStorage.setItem('savedData', JSON.stringify(data));
   }
 
   getDataFromLocalStorage() {
-    const savedData = localStorage.getItem("savedData");
+    const savedData = localStorage.getItem('savedData');
+    const parsedData = JSON.parse(savedData);
     if (!savedData) {
       this.fetchAndSaveData();
-      return [];
     } else {
-      return JSON.parse(savedData);
+      this.setState({
+        pokemonData: parsedData,
+        isFetching: false
+      })
     }
   }
 
@@ -78,16 +90,28 @@ class App extends Component {
   }
 
   render() {
-    const { filters } = this.state;
+    const { filters, isFetching } = this.state;
     const { pokemonName } = filters;
     const filteredPokemons = this.filterPokemonsByName();
     return (
       <div className="App">
-        <Main
+        <Triangle styles="triangle triangle-left" />
+
+        <Triangle styles="triangle triangle-right" />
+
+        <Header
           pokemonName={pokemonName}
-          pokemonData={filteredPokemons}
           saveUserQuery={this.saveUserQuery}
         />
+        
+        <Main
+          pokemonData={filteredPokemons}
+          isFetching={isFetching}
+        />
+
+        <Circle styles="circle circle-left" />
+
+        <Circle styles="circle circle-right" />
       </div>
     );
   }

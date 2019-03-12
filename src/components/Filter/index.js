@@ -9,7 +9,7 @@ class Filter extends Component {
     return (
       <section className="app__filter">
         <Input
-          labelContent="Filter pokemons by name"
+          labelContent="Filter Pokémons by name"
           inputType="text"
           inputName="pokemonName"
           inputValue={pokemonName}
